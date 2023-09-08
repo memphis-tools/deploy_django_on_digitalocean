@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% block title %}HOME{% endblock title %}
+
+{% block content %}
+<div class="section_container">
+  <div class="mb-3 d-flex flex-column align-items-sm-center flex-md-column justify-content-center">
+      <h1 class="py-5">Welcome to a Django dummy app</h1>
+      <div class="w-75 w-md-50 d-flex align-items-center flex-column flex-md-row">
+        <img class="px-5 px-md-2 py-3" src="{% static 'assets/img/85-200x300.jpg' %}" alt="dummy picture from https://picsum.photos/">
+        <p class="px-5 px-md-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, ex in gravida varius, nisl magna malesuada ex, a tincidunt erat tortor id est.
+          Quisque dapibus risus et tellus pellentesque, eget accumsan ipsum bibendum.
+          Proin commodo sem ut congue auctor. Integer scelerisque vitae lectus vitae pretium.
+          Aliquam nec turpis lacinia, rutrum lorem vitae, facilisis massa. Aenean a fringilla sapien, quis convallis nisi.
+          Donec quis tellus accumsan, facilisis nibh eu, blandit ligula. Nam convallis tincidunt dolor ac dictum.
+          Fusce a mollis urna.
+          Aliquam id rutrum leo, et imperdiet purus. Aenean sollicitudin quam sit amet risus mattis molestie.
+          Nulla finibus metus ac orci tempor, vulputate finibus turpis vestibulum. Suspendisse varius tortor sed felis posuere tempor.
+          Praesent aliquet eleifend magna, in dictum nisl. Quisque mattis auctor arcu quis.
+        </p>
+      </div>
+  </div>
+</div>
+{% endblock content %}

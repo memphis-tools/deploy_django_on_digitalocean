@@ -1,0 +1,85 @@
+# original comes from: https://github.com/digitalocean/sample-django
+name: deploy-django-on-digitalocean
+services:
+- name: server
+  github:
+    repo: memphis-tools/deploy_django_on_digitalocean
+    branch: main
+    deploy_on_push: true
+  run_command: gunicorn --worker-tmp-dir /dev/shm django_on_digitalocean.wsgi
+  envs:
+  - key: DISABLE_COLLECTSTATIC
+    value: "1"
+    scope: BUILD_TIME
+  - key: DATABASE_URL
+    value: "${db.DATABASE_URL}"
+    scope: RUN_TIME
+  - key: DJANGO_ALLOWED_HOSTS
+    value: "${APP_DOMAIN}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_LOGIN
+    value: "{{DJANGO_ADMIN_LOGIN}}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_PASSWORD
+    value: "{{DJANGO_ADMIN_PASSWORD}}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_EMAIL
+    value: "{{DJANGO_ADMIN_EMAIL}}"
+    scope: RUN_TIME
+  - key: DEBUG
+    value: "False"
+    scope: RUN_TIME
+  - key: SECRET_KEY
+    value: "{{SECRET_KEY}}"
+    scope: RUN_TIME
+jobs:
+- name: migrate
+  kind: PRE_DEPLOY
+  github:
+    repo: memphis-tools/deploy_django_on_digitalocean
+    branch: main
+    deploy_on_push: true
+  run_command: python manage.py makemigrations && python manage.py migrate && python manage.py init_app_topblog
+  envs:
+  - key: DISABLE_COLLECTSTATIC
+    value: "1"
+    scope: BUILD_TIME
+  - key: DATABASE_URL
+    value: "${db.DATABASE_URL}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_LOGIN
+    value: "{{DJANGO_ADMIN_LOGIN}}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_PASSWORD
+    value: "{{DJANGO_ADMIN_PASSWORD}}"
+    scope: RUN_TIME
+  - key: DJANGO_ADMIN_EMAIL
+    value: "{{DJANGO_ADMIN_EMAIL}}"
+    scope: RUN_TIME
+  - key: DEBUG
+    value: "False"
+    scope: BUILD_TIME
+  - key: SECRET_KEY
+    value: "{{SECRET_KEY}}"
+static_sites:
+- name: static
+  github:
+    repo: memphis-tools/deploy_django_on_digitalocean
+    branch: main
+    deploy_on_push: true
+  # This happens as part of the Python/DJango buildpack:
+  # build_command: python manage.py collectstatic --noinput
+  output_dir: staticfiles
+  routes:
+  - path: /static
+databases:
+# Create a new dev DB:
+- name: db
+  engine: PG
+  version: "12"
+# Or bring an existing DB:
+# - name: db
+#   production: true
+#   cluster_name: mydb
+#   engine: PG
+#   version: "12"

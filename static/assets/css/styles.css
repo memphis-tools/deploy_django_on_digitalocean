@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 300;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.81),rgba(0, 0, 0, 0.81)), url("../../assets/img/allyson-beaucourt-8bEMXJ_NwF4-unsplash.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+img {
+  border-radius: 5%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}

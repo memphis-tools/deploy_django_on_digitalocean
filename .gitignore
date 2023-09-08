@@ -1,0 +1,10 @@
+env
+.env
+venv
+.venv
+__pycache__
+*.pyc
+.envrc
+db.sqlite3
+staticfiles/
+.do/app.yaml

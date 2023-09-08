@@ -1,0 +1,56 @@
+{% load static %}
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock title %}</title>
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Rajdhani:wght@300&display=swap" rel="stylesheet">
+        <!--  Custom css -->
+        <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">TopBlog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="btn nav-link btn-outline-primary border-0" aria-current="page" href="{% url 'logout' %}">logout</a>
+                      </li>
+                      {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </nav>
+        </header>
+        <main>
+          <section>
+            {% block content %}{% endblock content %}
+          </section>
+        </main>
+        <footer class="mb-0">
+          <div class="container d-flex flex-column align-items-center justify-content-center">
+            <div id="footer_date"></div>
+          </div>
+        </footer>
+        <script>
+          var footer_date = new Date();
+          document.getElementById("footer_date").innerHTML = "Copyright © TopBlog " + footer_date.getFullYear();
+        </script>
+    </body>
+</html>
