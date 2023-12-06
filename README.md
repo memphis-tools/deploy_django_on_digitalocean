@@ -1,3 +1,5 @@
+![Screenshot](https://img.shields.io/badge/python-v3.10-blue?logo=python&logoColor=yellow)
+![Screenshot](https://img.shields.io/badge/django.framework--blue?logo=django&logoColor=yellow)
 # Deploy Django on Digital Ocean
 
 ## Project description
